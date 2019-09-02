@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- lab3.xml에서 객체를 읽어옴; spring  constructor injection
+<bean id="car" class="lab3.Car">
+	<constructor-arg name="model" value="RR"></constructor-arg>
+	<constructor-arg name="price" value="6000"></constructor-arg>
+</bean>
+
+<bean id="people" class="lab3.People">
+	<constructor-arg name ="name" value="선민"></constructor-arg>
+	<constructor-arg name="phone" value="010-1234-5678"></constructor-arg>
+	<constructor-arg ref="car"></constructor-arg>	
+</bean> -->
+
+<!-- lab3.xml에서 객체 주입; setter injection
+ -->
+ <bean id="car" class="lab3.Car">
+	<property name="model" value ="AM"></property>
+	<property name="price" value="5555"></property>
+</bean>
+
+<!-- <bean id="people" class="lab3.People">
+	<property name="name" value="누구지"></property>
+	<property name="phone" value="222"></property>
+	<property name="car" ref="car"></property>
+</bean> -->
+
+<bean id="license1" class="lab3.License" p:title="ocp" p:year="2019"></bean>
+<bean id="license2" class="lab3.License" p:title="sqld" p:year="2020"></bean>
+
+<bean
+id="people" class="lab3.People"
+p:name="가나다" p:phone="1234"
+autowire="byType" scope="prototype"> <!-- p:car-ref="car".....autowire="byName" -->
+<property name="licenses" >
+	<list>
+		<ref bean="license1"/>
+		<ref bean="license2"/>
+	</list>
+</property>
+
+<property name="major">
+	<list>
+	<value>영어</value>
+	<value>컴퓨터공학과</value>
+	<value>통계학과</value>
+	</list>
+</property>
+
+</bean>
+
+</beans>
